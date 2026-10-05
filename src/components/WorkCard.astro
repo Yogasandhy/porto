@@ -1,11 +1,13 @@
 ---
-interface Props { project: typeof import('./data').projects[number]; }
-const { project } = Astro.props;
+interface Props { project: typeof import('./data').projects[number]; index: number; }
+const { project, index } = Astro.props;
 const isEsign = project.accent === 'esign';
+const isCommunity = project.accent === 'community';
+const isExpense = project.accent === 'expense';
 ---
 <article id={project.id} class={`project-card project-card--${project.accent}`}>
   <div class="project-art" aria-hidden="true">
-    <span class="art-index">VISUAL STUDY / {isEsign ? '01' : '02'}</span>
+    <span class="art-index">VISUAL STUDY / {String(index + 1).padStart(2, '0')}</span>
     <div class="art-ring art-ring--outer"></div>
     <div class="art-ring art-ring--inner"></div>
     <div class="art-phone">
@@ -13,7 +15,7 @@ const isEsign = project.accent === 'esign';
       <div class="art-screen">
         <div class="screen-brand">
           <img class="screen-appmark" src={project.icon} alt="" loading="lazy" decoding="async" />
-          <span>{isEsign ? 'eSign Nusawork' : 'Sumut Cerdas'}</span>
+          <span>{project.title}</span>
         </div>
         {isEsign ? (
           <div class="screen-content screen-content--esign">
@@ -26,27 +28,53 @@ const isEsign = project.accent === 'esign';
             <div class="screen-signature"><span>SIGNATURE / E-METERAI</span><i>Y</i></div>
             <div class="screen-action">Review document <span aria-hidden="true">&#8594;</span></div>
           </div>
+        ) : isCommunity ? (
+          <div class="screen-content screen-content--community">
+            <span class="screen-kicker">Community · report management</span>
+            <strong>Every report,<br />in view.</strong>
+            <div class="screen-report-panel">
+              <span>REPORT OVERVIEW</span>
+              <div class="screen-report-row"><i></i>Community reports</div>
+              <div class="screen-report-row"><i></i>Updates by status</div>
+              <div class="screen-report-row"><i></i>Service totals</div>
+            </div>
+            <div class="screen-report-action">Review reports <span aria-hidden="true">&#8594;</span></div>
+          </div>
+        ) : isExpense ? (
+          <div class="screen-content screen-content--expense">
+            <span class="screen-kicker">Personal finance · daily overview</span>
+            <strong>Know where<br />it goes.</strong>
+            <div class="screen-finance-panel">
+              <span>MONTHLY OVERVIEW</span>
+              <div class="screen-finance-row"><i></i>Income overview</div>
+              <div class="screen-finance-row"><i></i>Expense history</div>
+            </div>
+            <div class="screen-finance-categories"><span>Food</span><span>Transport</span><span>More</span></div>
+          </div>
         ) : (
           <div class="screen-content screen-content--sumut">
-            <span class="screen-kicker">North Sumatra, connected</span>
-            <strong>Public services<br />in one place.</strong>
+            <span class="screen-kicker">North Sumatra · Public services</span>
+            <strong>One portal,<br />for everyone.</strong>
             <div class="screen-services">
               <span><i>+</i>Health</span>
-              <span><i>&#9678;</i>Travel</span>
-              <span><i>&#8599;</i>Services</span>
+              <span><i>&#9678;</i>Tourism</span>
+              <span><i>&#8599;</i>Licensing</span>
             </div>
-            <div class="screen-service-note"><b>Explore Sumut</b><span>Information for everyday life</span></div>
+            <div class="screen-service-note"><b>Vehicle tax · Public reports</b><span>Government info · Local news</span></div>
           </div>
         )}
       </div>
     </div>
-    <span class="art-orbit-note">{isEsign ? 'SIGNATURE / E-METERAI / MOBILE' : 'PUBLIC SERVICES / ONE APP'}</span>
+    <span class="art-orbit-note">{isEsign ? 'SIGNATURE / E-METERAI / MOBILE' : isCommunity ? 'COMMUNITY REPORTS / SERVICE STATUS' : isExpense ? 'PERSONAL FINANCE / DAILY OVERVIEW' : 'PUBLIC SERVICES / ONE APP'}</span>
   </div>
   <div class="project-copy">
     <div>
       <div class="project-heading">
         <div><p class="eyebrow">{project.type}</p><h3>{project.title}</h3></div>
-        <span class="project-platforms">{project.platforms.join(' / ')}</span>
+        <div class="project-meta">
+          <span class="project-platforms">{project.platforms.join(' / ')}</span>
+          <span class:list={['project-release', { 'project-release--released': project.releaseStatus === 'Released' }]}>{project.releaseStatus}</span>
+        </div>
       </div>
       <p class="project-description">{project.description}</p>
     </div>
@@ -67,7 +95,9 @@ const isEsign = project.accent === 'esign';
             </svg>
           )}
         </a>)}</div>
-        : <span class="project-state">Selected project</span>}
+        : project.repository
+          ? <a class="project-source-link" href={project.repository} target="_blank" rel="noreferrer">View project on GitHub <span aria-hidden="true">&#8599;</span></a>
+          : <span class="project-state">Selected project</span>}
     </div>
   </div>
 </article>

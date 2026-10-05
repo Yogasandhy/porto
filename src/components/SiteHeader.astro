@@ -5,7 +5,8 @@ const current = Astro.url.pathname;
 <header class="site-header">
   <div class="container nav-wrap">
     <a class="wordmark" href="/" aria-label={`${site.name}, home`}>
-      <span class="wordmark-mark">{site.initials}</span><span>{site.name}</span>
+      <img class="wordmark-mark" src={site.avatar} alt="" aria-hidden="true" width="977" height="1610" decoding="async" />
+      <span>{site.name}</span>
     </a>
     <nav class="desktop-nav" aria-label="Primary navigation">
       {navigation.map((item) => <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>)}
