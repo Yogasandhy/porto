@@ -1,0 +1,24 @@
+---
+import { site } from './data';
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-identity">
+        <a class="footer-brand" href="/">{site.name}<span> / {site.role}</span></a>
+        <p>Mobile products, built with care.</p>
+      </div>
+      <div class="footer-contact">
+        <p class="footer-label">Get in touch</p>
+        <a href={`mailto:${site.email}`}><span>Email</span><strong>{site.email}</strong></a>
+        <a href={site.whatsapp} target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>+62 812 6507 3404</strong></a>
+      </div>
+      <div class="footer-social">
+        <p class="footer-label">Find me online</p>
+        <a href={site.github} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">&#8599;</span></a>
+        <a href={site.linkedin} target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">&#8599;</span></a>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>&copy; {new Date().getFullYear()} {site.name}</span><span>Flutter Developer <i></i> Indonesia</span></div>
+  </div>
+</footer>

@@ -1,0 +1,11 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { site, strengths } from '../components/data';
+---
+<SiteLayout title="About" description="About Yoga Sandhy Winata, Flutter developer.">
+<main id="main-content" class="inner-page about-page">
+  <section class="page-intro page-intro--about"><div class="container"><p class="eyebrow"><i></i> A bit about me</p><h1>Mobile apps,<br /><em>made human.</em></h1><p class="page-lede">I'm {site.name}, a Flutter developer who enjoys making useful products feel clear, thoughtful, and dependable.</p><div class="page-index"><span>BASED IN</span><strong>{site.location}</strong></div></div></section>
+  <section class="section about-details"><div class="container about-details-grid"><div><p class="eyebrow">My point of view</p><h2>Make every tap<br />feel <em>considered.</em></h2></div><div><p class="about-statement">I care about the details people notice and the ones they don't: a clear flow, responsive feedback, and an app that feels dependable from the first moment.</p><div class="strength-list">{strengths.map(([title, text], i) => <article><span>0{i + 1}</span><div><h3>{title}</h3><p>{text}</p></div></article>)}</div></div></div></section>
+  <section class="toolkit"><div class="container toolkit-inner"><p class="eyebrow">Tools I work with</p><div class="tool-list"><span>Flutter</span><span>Dart</span><span>Android</span><span>iOS</span></div></div></section>
+</main>
+</SiteLayout>

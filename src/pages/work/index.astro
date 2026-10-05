@@ -1,0 +1,13 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import { projects, site } from '../../components/data';
+---
+<SiteLayout title="Selected Work" description="Two mobile applications by Yoga Sandhy Winata.">
+<main id="main-content" class="inner-page work-page">
+  <section class="page-intro page-intro--work"><div class="container"><p class="eyebrow"><i></i> Selected work / 02</p><h1>Useful apps,<br /><em>made with care.</em></h1><p class="page-lede">Two mobile products with different goals and one shared focus: making everyday experiences work better.</p><div class="page-index"><span>FLUTTER APPLICATIONS</span><strong>02</strong></div></div></section>
+  <section class="section project-list"><div class="container"><div class="project-list-top"><p class="eyebrow">Flutter applications</p><a class="subtle-link" href={site.github} target="_blank" rel="noreferrer">More on GitHub &#8599;</a></div>
+    {projects.map((project) => <WorkCard project={project} />)}
+  </div></section>
+</main>
+</SiteLayout>
