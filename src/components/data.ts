@@ -9,9 +9,9 @@ export const navigation = [
   { href: '/about/', label: 'About' },
 ] as const;
 export const projects = [
-  { id: 'esign-nusawork', title: 'eSign Nusawork', type: 'Digital signature',
-    description: 'A mobile-first way to review and sign documents, available on Android and iOS.',
-    summary: 'A smoother document-signing experience, wherever work happens.', accent: 'esign',
+  { id: 'esign-nusawork', title: 'eSign Nusawork', type: 'Digital signature · mobile app',
+    description: 'The mobile app for Nusawork e-Sign: digital signatures and e-Meterai for HR and business documents on Android and iOS.',
+    summary: 'The Nusawork e-Sign service, available for signing and managing documents on mobile.', accent: 'esign',
     icon: '/projects/esign-nusawork-icon.png',
     platforms: ['Android', 'iOS'], tags: ['Flutter', 'E-signature'],
     links: [{ label: 'Google Play', icon: 'google-play', href: 'https://play.google.com/store/apps/details?id=id.net.nusa.esigner' },
