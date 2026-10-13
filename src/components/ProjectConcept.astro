@@ -1,0 +1,110 @@
+---
+interface Props {
+  kind: 'community' | 'expense';
+}
+
+const { kind } = Astro.props;
+const isCommunity = kind === 'community';
+const appTitle = isCommunity ? 'Reports' : 'My Wallet';
+const appTitleId = isCommunity ? 'Pelayanan' : 'Dompetku';
+const appMark = isCommunity ? 'MP' : 'ET';
+const screens = isCommunity
+  ? [
+      { id: 'overview', eyebrow: 'OVERVIEW', eyebrowId: 'RINGKASAN', title: 'Community reports', titleId: 'Laporan warga' },
+      { id: 'list', eyebrow: 'REPORT LIST', eyebrowId: 'DAFTAR LAPORAN', title: 'Needs review', titleId: 'Perlu ditinjau' },
+      { id: 'detail', eyebrow: 'REPORT DETAILS', eyebrowId: 'DETAIL LAPORAN', title: 'Blocked drainage', titleId: 'Drainase tersumbat' },
+    ]
+  : [
+      { id: 'overview', eyebrow: 'MONTHLY SUMMARY', eyebrowId: 'RINGKASAN BULANAN', title: 'Your finances', titleId: 'Keuanganmu' },
+      { id: 'list', eyebrow: 'HISTORY', eyebrowId: 'RIWAYAT', title: 'Transactions', titleId: 'Transaksi' },
+      { id: 'budget', eyebrow: 'PLANNING', eyebrowId: 'RENCANA', title: 'Budget', titleId: 'Anggaran' },
+      { id: 'entry', eyebrow: 'NEW TRANSACTION', eyebrowId: 'TRANSAKSI BARU', title: 'Add transaction', titleId: 'Catat transaksi' },
+    ];
+---
+<div class:list={['project-art', 'project-art--concept', `project-art--${kind}`]}>
+  <span class="art-index" data-en="CONCEPT UI / MOBILE SCREENS" data-id="KONSEP UI / LAYAR MOBILE">CONCEPT UI / MOBILE SCREENS</span>
+  <div class:list={['concept-scene', `concept-scene--${kind}`]} aria-hidden="true">
+    {screens.map((screen) => (
+      <article class:list={['concept-device', `concept-device--${screen.id}`]}>
+        <div class="concept-device-screen">
+          <div class="concept-status"><strong>9:41</strong><span><i></i><i></i><b></b></span></div>
+          <div class="concept-appbar">
+            <span class="concept-mark">{appMark}</span>
+            <strong data-en={appTitle} data-id={appTitleId}>{appTitle}</strong>
+            <i></i>
+          </div>
+          <div class="concept-content">
+            <span class="concept-overline" data-en={screen.eyebrow} data-id={screen.eyebrowId}>{screen.eyebrow}</span>
+            <h3><span data-en={screen.title} data-id={screen.titleId}>{screen.title}</span><span>.</span></h3>
+
+            {screen.id === 'overview' && isCommunity ? (
+              <>
+                <div class="concept-highlight">
+                  <span data-en="Reports resolved" data-id="Laporan selesai">Laporan selesai</span><strong>28</strong><small data-en="this month" data-id="bulan ini">bulan ini</small>
+                  <div class="concept-progress"><i></i></div>
+                </div>
+                <div class="concept-mini-stats">
+                  <div><strong>12</strong><span data-en="New" data-id="Baru">Baru</span></div>
+                  <div><strong>05</strong><span data-en="In progress" data-id="Diproses">Diproses</span></div>
+                </div>
+                <div class="concept-section-title"><strong data-en="Latest" data-id="Terbaru">Terbaru</strong><span data-en="All" data-id="Semua">Semua</span></div>
+                <div class="concept-row"><i class="concept-row-icon"></i><span><strong data-en="Damaged road" data-id="Jalan rusak">Jalan rusak</strong><small data-en="Medan · Today" data-id="Medan · Hari ini">Medan · Hari ini</small></span><b></b></div>
+              </>
+            ) : screen.id === 'list' && isCommunity ? (
+              <>
+                <div class="concept-filter"><b data-en="All" data-id="Semua">Semua</b><span data-en="New" data-id="Baru">Baru</span></div>
+                <div class="concept-list-row"><i></i><span><strong data-en="Pothole" data-id="Jalan berlubang">Jalan berlubang</strong><small data-en="Infrastructure" data-id="Infrastruktur">Infrastruktur</small></span><b data-en="New" data-id="Baru">Baru</b></div>
+                <div class="concept-list-row"><i></i><span><strong data-en="Waste buildup" data-id="Sampah menumpuk">Sampah menumpuk</strong><small data-en="Cleanliness" data-id="Kebersihan">Kebersihan</small></span><b class="is-progress" data-en="In progress" data-id="Proses">Proses</b></div>
+                <div class="concept-list-row"><i></i><span><strong data-en="Street light" data-id="Lampu jalan">Lampu jalan</strong><small data-en="Public facilities" data-id="Fasilitas umum">Fasilitas umum</small></span><b class="is-done" data-en="Done" data-id="Selesai">Selesai</b></div>
+                <div class="concept-list-note"><strong data-en="12 reports" data-id="12 laporan">12 laporan</strong><span data-en="awaiting review" data-id="menunggu peninjauan">menunggu peninjauan</span></div>
+              </>
+            ) : screen.id === 'detail' && isCommunity ? (
+              <>
+                <div class="concept-location"><i></i><span data-en="Medan, North Sumatra" data-id="Medan, Sumatera Utara">Medan, Sumatera Utara</span></div>
+                <div class="concept-timeline">
+                  <div class="is-done"><i></i><span><strong data-en="Report received" data-id="Laporan diterima">Laporan diterima</strong><small data-en="12 Jun · 09:41" data-id="12 Juni · 09:41">12 Juni · 09:41</small></span></div>
+                  <div class="is-current"><i></i><span><strong data-en="Under review" data-id="Sedang ditinjau">Sedang ditinjau</strong><small data-en="Awaiting action" data-id="Menunggu tindak lanjut">Menunggu tindak lanjut</small></span></div>
+                  <div><i></i><span><strong data-en="Resolved" data-id="Selesai">Selesai</strong><small data-en="Next update" data-id="Pembaruan berikutnya">Pembaruan berikutnya</small></span></div>
+                </div>
+                <div class="concept-action"><span data-en="Update status" data-id="Perbarui status">Perbarui status</span> <span aria-hidden="true">↗</span></div>
+              </>
+            ) : screen.id === 'overview' ? (
+              <>
+                <div class="concept-balance"><span><span data-en="Total balance" data-id="Total saldo">Total saldo</span> <i data-en="June 2026" data-id="Juni 2026">Juni 2026</i></span><strong>Rp 4,85 jt</strong><small data-en="+12.4% this month" data-id="+12,4% bulan ini">+12,4% bulan ini</small></div>
+                <div class="concept-chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="concept-chart-labels"><span>01 Jun</span><span>30 Jun</span></div>
+                <div class="concept-mini-stats"><div><span data-en="Income" data-id="Pemasukan">Pemasukan</span><strong>8,5 jt</strong></div><div><span data-en="Expenses" data-id="Pengeluaran">Pengeluaran</span><strong>3,6 jt</strong></div></div>
+              </>
+            ) : screen.id === 'list' ? (
+              <>
+                <div class="concept-filter"><b data-en="All" data-id="Semua">Semua</b><span data-en="June 2026" data-id="Juni 2026">Juni 2026</span></div>
+                <div class="concept-transaction"><i>&#8722;</i><span><strong data-en="Lunch" data-id="Makan siang">Makan siang</strong><small data-en="Today · Food" data-id="Hari ini · Makanan">Hari ini · Makanan</small></span><b>&#8722;45 rb</b></div>
+                <div class="concept-transaction"><i>&#8599;</i><span><strong data-en="Transport" data-id="Transportasi">Transportasi</strong><small data-en="Yesterday · Travel" data-id="Kemarin · Perjalanan">Kemarin · Perjalanan</small></span><b>&#8722;30 rb</b></div>
+                <div class="concept-transaction"><i class="is-income">+</i><span><strong data-en="Income" data-id="Pemasukan">Pemasukan</strong><small data-en="12 Jun · Salary" data-id="12 Jun · Gaji">12 Jun · Gaji</small></span><b class="is-income">+8,5 jt</b></div>
+                <div class="concept-month-total"><span data-en="Total expenses" data-id="Total pengeluaran">Total pengeluaran</span><strong>Rp 3.650.000</strong></div>
+              </>
+            ) : screen.id === 'budget' ? (
+              <>
+                <div class="concept-budget-total"><span data-en="Budget used" data-id="Anggaran terpakai">Anggaran terpakai</span><strong>Rp 2,1 jt <small>/ Rp 4 jt</small></strong><div><i></i></div></div>
+                <div class="concept-budget-row"><i></i><span><strong data-en="Food" data-id="Makanan">Makanan</strong><small>620 rb / 1,2 jt</small></span><b>52%</b></div>
+                <div class="concept-budget-row"><i></i><span><strong data-en="Transport" data-id="Transportasi">Transportasi</strong><small>360 rb / 800 rb</small></span><b>45%</b></div>
+                <div class="concept-budget-row"><i></i><span><strong data-en="Bills" data-id="Tagihan">Tagihan</strong><small>750 rb / 1 jt</small></span><b>75%</b></div>
+                <div class="concept-action"><span data-en="View categories" data-id="Lihat kategori">Lihat kategori</span> <span aria-hidden="true">&#8599;</span></div>
+              </>
+            ) : (
+              <>
+                <div class="concept-entry-type"><strong data-en="Expense" data-id="Pengeluaran">Pengeluaran</strong><span data-en="Income" data-id="Pemasukan">Pemasukan</span></div>
+                <div class="concept-entry-amount"><small data-en="Transaction amount" data-id="Nominal transaksi">Nominal transaksi</small><strong>Rp 0</strong></div>
+                <div class="concept-entry-field"><span data-en="Category" data-id="Kategori">Kategori</span><strong><span data-en="Food" data-id="Makanan">Makanan</span> <i>&#8964;</i></strong></div>
+                <div class="concept-entry-field"><span data-en="Date" data-id="Tanggal">Tanggal</span><strong><span data-en="Today" data-id="Hari ini">Hari ini</span> <i>&#8964;</i></strong></div>
+                <div class="concept-action"><span data-en="Save transaction" data-id="Simpan transaksi">Simpan transaksi</span> <span aria-hidden="true">&#8599;</span></div>
+              </>
+            )}
+          </div>
+          <div class="concept-bottom-nav"><i class="is-active"></i><i></i><i></i><i></i></div>
+        </div>
+      </article>
+    ))}
+  </div>
+  <span class="art-orbit-note" data-en={isCommunity ? 'REPORTS / REVIEW / STATUS' : 'BALANCE / TRANSACTIONS / BUDGETS'} data-id={isCommunity ? 'LAPORAN / TINJAU / STATUS' : 'SALDO / TRANSAKSI / ANGGARAN'}>{isCommunity ? 'REPORTS / REVIEW / STATUS' : 'BALANCE / TRANSACTIONS / BUDGETS'}</span>
+</div>

@@ -4,13 +4,23 @@ const current = Astro.url.pathname;
 ---
 <header class="site-header">
   <div class="container nav-wrap">
-    <a class="wordmark" href="/" aria-label={`${site.name}, home`}>
+    <a class="wordmark" href="/" aria-label={`${site.name}, home`} data-aria-label-en={`${site.name}, home`} data-aria-label-id={`${site.name}, beranda`}>
       <img class="wordmark-mark" src={site.avatar} alt="" aria-hidden="true" width="977" height="1610" decoding="async" />
       <span>{site.name}</span>
     </a>
-    <nav class="desktop-nav" aria-label="Primary navigation">
-      {navigation.map((item) => <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>)}
+    <nav class="desktop-nav" aria-label="Primary navigation" data-aria-label-en="Primary navigation" data-aria-label-id="Navigasi utama">
+      {navigation.map((item) => <a href={item.href} aria-current={current === item.href ? 'page' : undefined} data-en={item.label} data-id={item.labelId}>{item.label}</a>)}
     </nav>
-    <nav class="mobile-nav" aria-label="Mobile navigation">{navigation.map((item) => <a href={item.href}>{item.label}</a>)}</nav>
+    <div class="site-controls">
+      <div class="locale-switch" role="group" aria-label="Language" data-aria-label-en="Language" data-aria-label-id="Bahasa">
+        <button type="button" data-locale-button="en" aria-pressed="true" aria-label="English">EN</button>
+        <button type="button" data-locale-button="id" aria-pressed="false" aria-label="Bahasa Indonesia">ID</button>
+      </div>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" data-theme-label-light-en="Switch to dark mode" data-theme-label-light-id="Aktifkan mode gelap" data-theme-label-dark-en="Switch to light mode" data-theme-label-dark-id="Aktifkan mode terang" aria-pressed="false">
+        <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.5A8.3 8.3 0 0 1 8.5 3.8a8.5 8.5 0 1 0 11.7 11.7Z" /></svg>
+        <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" /></svg>
+      </button>
+    </div>
+    <nav class="mobile-nav" aria-label="Mobile navigation" data-aria-label-en="Mobile navigation" data-aria-label-id="Navigasi mobile">{navigation.map((item) => <a href={item.href} aria-current={current === item.href ? 'page' : undefined} data-en={item.label} data-id={item.labelId}>{item.label}</a>)}</nav>
   </div>
 </header>

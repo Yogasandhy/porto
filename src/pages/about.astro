@@ -1,11 +1,46 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { site, strengths } from '../components/data';
+import { education, experience, learningPrograms, site, strengths } from '../components/data';
 ---
-<SiteLayout title="About" description="About Yoga Sandhy Winata, Flutter developer.">
+<SiteLayout title="About" titleId="Tentang" description="About Yoga Sandhy Winata, Flutter developer." descriptionId="Tentang Yoga Sandhy Winata, developer Flutter.">
 <main id="main-content" class="inner-page about-page">
-  <section class="page-intro page-intro--about"><div class="container"><p class="eyebrow"><i></i> A bit about me</p><h1>Mobile apps,<br /><em>made human.</em></h1><p class="page-lede">I'm {site.name}, a Flutter developer who enjoys making useful products feel clear, thoughtful, and dependable.</p><div class="hero-actions cv-actions"><a class="button button--primary" href="/cv-yoga-sandhy-winata.pdf" target="_blank" rel="noreferrer">View CV <span aria-hidden="true">&#8599;</span></a><a class="text-link" href="/cv-yoga-sandhy-winata.pdf" download="Yoga-Sandhy-Winata-CV.pdf">Download PDF</a></div><div class="page-index"><span>BASED IN</span><strong>{site.location}</strong></div></div></section>
-  <section class="section about-details"><div class="container about-details-grid"><div><p class="eyebrow">My point of view</p><h2>Make every tap<br />feel <em>considered.</em></h2></div><div><p class="about-statement">I care about the details people notice and the ones they don't: a clear flow, responsive feedback, and an app that feels dependable from the first moment.</p><div class="strength-list">{strengths.map(([title, text], i) => <article><span>0{i + 1}</span><div><h3>{title}</h3><p>{text}</p></div></article>)}</div></div></div></section>
-  <section class="toolkit"><div class="container toolkit-inner"><p class="eyebrow">Tools I work with</p><div class="tool-list"><span>Flutter</span><span>Dart</span><span>Android</span><span>iOS</span><span>Firebase</span><span>Supabase</span></div></div></section>
+  <section class="page-intro page-intro--about"><div class="container"><p class="eyebrow"><i></i> <span data-en="A bit about me" data-id="Tentang saya">A bit about me</span></p><h1><span data-en="Mobile apps," data-id="Aplikasi mobile,">Mobile apps,</span><br /><em data-en="made human." data-id="dibuat untuk manusia.">made human.</em></h1><p class="page-lede" data-en={`I'm ${site.name}, a Flutter developer who enjoys making useful products feel clear, thoughtful, and dependable.`} data-id={`Saya ${site.name}, developer Flutter yang senang membuat produk bermanfaat terasa jelas, matang, dan dapat diandalkan.`}>I'm {site.name}, a Flutter developer who enjoys making useful products feel clear, thoughtful, and dependable.</p><div class="hero-actions cv-actions"><a class="button button--primary" href="/cv-yoga-sandhy-winata.pdf" target="_blank" rel="noreferrer"><span data-en="View CV" data-id="Lihat CV">View CV</span> <span aria-hidden="true">&#8599;</span></a><a class="text-link" href="/cv-yoga-sandhy-winata.pdf" download="Yoga-Sandhy-Winata-CV.pdf" data-en="Download PDF" data-id="Unduh PDF">Download PDF</a></div><div class="page-index"><span data-en="BASED IN" data-id="BERLOKASI DI">BASED IN</span><strong>{site.location}</strong></div></div></section>
+  <section class="section experience-section">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="eyebrow"><span data-en="Experience" data-id="Pengalaman">Experience</span> / {String(experience.length).padStart(2, '0')}</p><h2><span data-en="Building for" data-id="Membangun untuk">Building for</span><br /><em data-en="real use." data-id="kebutuhan nyata.">real use.</em></h2></div>
+        <p class="experience-intro" data-en="Product work across public services, digital signatures, and interactive learning experiences." data-id="Pengalaman produk di bidang layanan publik, tanda tangan digital, dan pengalaman belajar interaktif.">Product work across public services, digital signatures, and interactive learning experiences.</p>
+      </div>
+      <ol class="experience-list">
+        {experience.map((item, index) => <li class="experience-item">
+          <span class="experience-index">0{index + 1}</span>
+          <div><p class="eyebrow" data-en={item.period} data-id={item.periodId}>{item.period}</p><h3 data-en={item.role} data-id={item.localized.role}>{item.role}</h3><p class="experience-organization">{item.organization}</p></div>
+          <p class="experience-description" data-en={item.description} data-id={item.localized.description}>{item.description}</p>
+        </li>)}
+      </ol>
+    </div>
+  </section>
+  <section class="section about-details"><div class="container about-details-grid"><div><p class="eyebrow" data-en="My point of view" data-id="Prinsip saya">My point of view</p><h2><span data-en="Make every tap" data-id="Buat setiap sentuhan">Make every tap</span><br /><span data-en="feel" data-id="terasa">feel</span> <em data-en="considered." data-id="bermakna.">considered.</em></h2></div><div><p class="about-statement" data-en="I care about the details people notice and the ones they don't: a clear flow, responsive feedback, and an app that feels dependable from the first moment." data-id="Saya memperhatikan detail yang terlihat maupun yang sering luput: alur yang jelas, respons yang tepat, dan aplikasi yang terasa dapat diandalkan sejak awal.">I care about the details people notice and the ones they don't: a clear flow, responsive feedback, and an app that feels dependable from the first moment.</p><div class="strength-list">{strengths.map((item, i) => <article><span>0{i + 1}</span><div><h3 data-en={item.title} data-id={item.titleId}>{item.title}</h3><p data-en={item.text} data-id={item.textId}>{item.text}</p></div></article>)}</div></div></div></section>
+  <section class="section resume-section">
+    <div class="container">
+      <div class="section-heading"><div><p class="eyebrow"><span data-en="Education" data-id="Pendidikan">Education</span> / <span data-en="learning" data-id="pembelajaran">learning</span></p><h2><span data-en="Always" data-id="Terus">Always</span> <em data-en="growing." data-id="bertumbuh.">growing.</em></h2></div></div>
+      <div class="resume-grid">
+        <article class="resume-card">
+          <p class="eyebrow" data-en="Education" data-id="Pendidikan">Education</p><h3 data-en={education.degree} data-id={education.localized.degree}>{education.degree}</h3><p class="resume-subtitle">{education.institution}</p>
+          <div class="resume-meta"><span data-en={education.period} data-id={education.periodId}>{education.period}</span><strong>GPA {education.gpa}</strong></div>
+          <p class="resume-language" data-en={education.languages} data-id={education.localized.languages}>{education.languages}</p>
+        </article>
+        <article class="resume-card">
+          <p class="eyebrow" data-en="Professional development" data-id="Pengembangan profesional">Professional development</p>
+          <div class="program-list">
+            {learningPrograms.map((program) => <div class="program-item">
+              <h4>{program.name} | <span data-en={program.program} data-id={program.localized.program}>{program.program}</span></h4><time data-en={program.period} data-id={program.periodId}>{program.period}</time><p data-en={program.description} data-id={program.localized.description}>{program.description}</p>
+            </div>)}
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="toolkit"><div class="container toolkit-inner"><p class="eyebrow" data-en="Tools I work with" data-id="Teknologi yang saya gunakan">Tools I work with</p><div class="tool-list"><span>Flutter</span><span>Dart</span><span>Kotlin</span><span>BLoC</span><span>REST APIs</span><span data-en="Clean Architecture" data-id="Arsitektur Bersih">Clean Architecture</span><span>Firebase</span><span>Supabase</span><span>Laravel</span><span>Git</span></div></div></section>
 </main>
 </SiteLayout>

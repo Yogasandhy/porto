@@ -3,10 +3,10 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import WorkCard from '../../components/WorkCard.astro';
 import { projects, site } from '../../components/data';
 ---
-<SiteLayout title="Selected Work" description="Published mobile apps and independent Flutter projects by Yoga Sandhy Winata.">
+<SiteLayout title="Selected Work" titleId="Proyek Pilihan" description="Selected mobile apps, web work, and internship projects by Yoga Sandhy Winata." descriptionId="Pilihan aplikasi mobile, proyek web, dan proyek magang Yoga Sandhy Winata.">
 <main id="main-content" class="inner-page work-page">
-  <section class="page-intro page-intro--work"><div class="container"><p class="eyebrow"><i></i> Selected work / {String(projects.length).padStart(2, '0')}</p><h1>Useful apps,<br /><em>made with care.</em></h1><p class="page-lede">A mix of published products and independent builds, each focused on making everyday workflows clearer.</p><div class="page-index"><span>FLUTTER APPLICATIONS</span><strong>{String(projects.length).padStart(2, '0')}</strong></div></div></section>
-  <section class="section project-list"><div class="container"><div class="project-list-top"><p class="eyebrow">Flutter applications</p><a class="subtle-link" href={site.github} target="_blank" rel="noreferrer">More on GitHub &#8599;</a></div>
+  <section class="page-intro page-intro--work"><div class="container"><p class="eyebrow"><i></i> <span data-en="Selected work" data-id="Proyek pilihan">Selected work</span> / {String(projects.length).padStart(2, '0')}</p><h1><span data-en="Useful apps," data-id="Aplikasi bermanfaat,">Useful apps,</span><br /><em data-en="made with care." data-id="dibuat dengan perhatian.">made with care.</em></h1><p class="page-lede" data-en="A mix of published apps, active product work, and an internship project adapted for the web." data-id="Kumpulan aplikasi yang telah dirilis, produk yang sedang dikembangkan, dan proyek magang yang diadaptasi untuk web.">A mix of published apps, active product work, and an internship project adapted for the web.</p><div class="page-index"><span data-en="MOBILE AND WEB PROJECTS" data-id="PROYEK MOBILE DAN WEB">MOBILE AND WEB PROJECTS</span><strong>{String(projects.length).padStart(2, '0')}</strong></div></div></section>
+  <section class="section project-list"><div class="container"><div class="project-list-top"><p class="eyebrow" data-en="Selected projects" data-id="Proyek pilihan">Selected projects</p><a class="subtle-link" href={site.github} target="_blank" rel="noreferrer"><span data-en="More on GitHub" data-id="Lihat di GitHub">More on GitHub</span> &#8599;</a></div>
     {projects.map((project, index) => <WorkCard project={project} index={index} />)}
   </div></section>
 </main>

@@ -3,12 +3,27 @@ import '../styles/site.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { site } from '../components/data';
-interface Props { title: string; description: string; }
-const { title, description } = Astro.props;
+interface Props { title: string; description: string; titleId: string; descriptionId: string; }
+const { title, description, titleId, descriptionId } = Astro.props;
 ---
 <!doctype html><html lang="en"><head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content={description} /><meta name="theme-color" content="#fbfaf6" />
+  <meta name="description" content={description} data-en={description} data-id={descriptionId} data-i18n-attribute="content" /><meta name="theme-color" content="#fbfaf6" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>{title} | {site.name}</title>
-</head><body><a class="skip-link" href="#main-content">Skip to content</a><SiteHeader /><slot /><SiteFooter /></body></html>
+  <title data-en={`${title} | ${site.name}`} data-id={`${titleId} | ${site.name}`}>{title} | {site.name}</title>
+  <script is:inline>
+    try {
+      const theme = localStorage.getItem('portfolio-theme');
+      const locale = localStorage.getItem('portfolio-locale');
+      document.documentElement.dataset.theme = theme === 'dark' ? 'dark' : 'light';
+      document.documentElement.lang = locale === 'id' ? 'id' : 'en';
+      document.documentElement.dataset.locale = locale === 'id' ? 'id' : 'en';
+    } catch {
+      document.documentElement.dataset.theme = 'light';
+      document.documentElement.lang = 'en';
+      document.documentElement.dataset.locale = 'en';
+    }
+  </script>
+</head><body><a class="skip-link" href="#main-content" data-en="Skip to content" data-id="Lewati ke konten">Skip to content</a><SiteHeader /><slot /><SiteFooter /><script>
+  import '../scripts/site-ui';
+</script></body></html>

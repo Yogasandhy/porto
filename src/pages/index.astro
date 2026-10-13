@@ -2,17 +2,17 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { featuredProjects } from '../components/data';
 ---
-<SiteLayout title="Flutter Developer" description="Portfolio of Yoga Sandhy Winata, Flutter developer.">
+<SiteLayout title="Flutter Developer" titleId="Developer Flutter" description="Portfolio of Yoga Sandhy Winata, Flutter developer." descriptionId="Portofolio Yoga Sandhy Winata, developer Flutter.">
 <main id="main-content">
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow"><i></i> Flutter developer</p>
+        <p class="eyebrow"><i></i> <span data-en="Flutter developer" data-id="Developer Flutter">Flutter developer</span></p>
         <h1>Yoga Sandhy<br /><em>Winata</em></h1>
-        <p class="hero-lede">I build mobile apps that help people get things done.</p>
+        <p class="hero-lede" data-en="I build mobile apps that help people get things done." data-id="Saya membangun aplikasi mobile yang membantu orang menyelesaikan hal penting dengan lebih mudah.">I build mobile apps that help people get things done.</p>
         <div class="hero-actions">
-          <a class="button button--primary" href="/cv-yoga-sandhy-winata.pdf" download="Yoga-Sandhy-Winata-CV.pdf">Download CV <span aria-hidden="true">&#8595;</span></a>
-          <a class="text-link" href="/work/">Explore my work <span aria-hidden="true">&#8599;</span></a>
+          <a class="button button--primary" href="/cv-yoga-sandhy-winata.pdf" download="Yoga-Sandhy-Winata-CV.pdf"><span data-en="Download CV" data-id="Unduh CV">Download CV</span> <span aria-hidden="true">&#8595;</span></a>
+          <a class="text-link" href="/work/"><span data-en="Explore my work" data-id="Lihat proyek saya">Explore my work</span> <span aria-hidden="true">&#8599;</span></a>
         </div>
       </div>
       <div class="hero-art" aria-hidden="true">
@@ -45,21 +45,24 @@ import { featuredProjects } from '../components/data';
   <section id="featured" class="section featured-section">
     <div class="container">
       <div class="section-heading">
-        <div><p class="eyebrow">Selected work <span class="count-pill">{String(featuredProjects.length).padStart(2, '0')}</span></p><h2>Apps with a<br /><em>job to do.</em></h2></div>
-        <a class="text-link" href="/work/">See all projects <span aria-hidden="true">&#8599;</span></a>
+        <div><p class="eyebrow"><span data-en="Selected work" data-id="Proyek pilihan">Selected work</span> <span class="count-pill">{String(featuredProjects.length).padStart(2, '0')}</span></p><h2><span data-en="Apps with a" data-id="Aplikasi dengan">Apps with a</span><br /><em data-en="job to do." data-id="tujuan jelas.">job to do.</em></h2></div>
+        <a class="text-link" href="/work/"><span data-en="See all projects" data-id="Lihat semua proyek">See all projects</span> <span aria-hidden="true">&#8599;</span></a>
       </div>
       <div class="featured-grid">
         {featuredProjects.map((project, index) => <a class:list={['featured-project', `featured-project--${project.accent}`]} href={`/work/#${project.id}`}>
           <div class="featured-art" aria-hidden="true">
             <div class="featured-art-ring"></div>
+            <div class="featured-screen-stack">
+              {project.gallery?.slice(0, 3).map((screen) => <img class="featured-screen" src={screen.src} alt="" loading="lazy" decoding="async" />)}
+            </div>
             <img class:list={['featured-app-icon', `featured-app-icon--${project.accent}`]} src={project.icon} alt="" loading="lazy" decoding="async" />
-            <span class="featured-art-caption">0{index + 1} / MOBILE PRODUCT</span>
+            <span class="featured-art-caption" data-en={`0${index + 1} / MOBILE PRODUCT`} data-id={`0${index + 1} / PRODUK MOBILE`}>0{index + 1} / MOBILE PRODUCT</span>
           </div>
           <div class="featured-copy">
-            <p class="eyebrow">{project.type} <span>{project.platforms.join(' / ')}</span></p>
+            <p class="eyebrow"><span data-en={project.type} data-id={project.localized.id.type}>{project.type}</span> <span>{project.platforms.join(' / ')}</span></p>
             <h3>{project.title}</h3>
-            <p>{project.summary}</p>
-            <span class="featured-link">Explore project <i aria-hidden="true">&#8594;</i></span>
+            <p data-en={project.summary} data-id={project.localized.id.summary}>{project.summary}</p>
+            <span class="featured-link"><span data-en="Explore project" data-id="Lihat proyek">Explore project</span> <i aria-hidden="true">&#8594;</i></span>
           </div>
         </a>)}
       </div>
@@ -68,9 +71,9 @@ import { featuredProjects } from '../components/data';
 
   <section class="home-note">
     <div class="container note-inner">
-      <div><p class="eyebrow">My approach</p><h2>Make the next<br /><em>step clear.</em></h2></div>
-      <p class="note-copy">From reviewing a document to accessing a public service, I focus on clear steps and reliable feedback—so people know what to do and what just happened.</p>
-      <a class="button button--ink" href="/about/">More about me <span aria-hidden="true">&#8599;</span></a>
+      <div><p class="eyebrow" data-en="My approach" data-id="Cara saya bekerja">My approach</p><h2><span data-en="Make the next" data-id="Buat langkah berikutnya">Make the next</span><br /><em data-en="step clear." data-id="jadi jelas.">step clear.</em></h2></div>
+      <p class="note-copy" data-en="From reviewing a document to accessing a public service, I focus on clear steps and reliable feedback—so people know what to do and what just happened." data-id="Dari meninjau dokumen hingga mengakses layanan publik, saya mengutamakan alur yang jelas dan respons yang dapat diandalkan—agar orang tahu apa yang perlu dilakukan dan apa yang baru saja terjadi.">From reviewing a document to accessing a public service, I focus on clear steps and reliable feedback—so people know what to do and what just happened.</p>
+      <a class="button button--ink" href="/about/"><span data-en="More about me" data-id="Kenali saya">More about me</span> <span aria-hidden="true">&#8599;</span></a>
     </div>
   </section>
 </main>

@@ -1,12 +1,27 @@
 ---
+import ProjectConcept from './ProjectConcept.astro';
 interface Props { project: typeof import('./data').projects[number]; index: number; }
 const { project, index } = Astro.props;
 const isEsign = project.accent === 'esign';
 const isCommunity = project.accent === 'community';
 const isExpense = project.accent === 'expense';
+const conceptKind = project.accent === 'community' || project.accent === 'expense' ? project.accent : null;
+const orbitNote = isEsign ? 'SIGNATURE / E-METERAI / MOBILE' : isCommunity ? 'COMMUNITY REPORTS / SERVICE STATUS' : isExpense ? 'PERSONAL FINANCE / DAILY OVERVIEW' : 'PUBLIC SERVICES / ONE APP';
+const orbitNoteId = isEsign ? 'TANDA TANGAN / E-METERAI / MOBILE' : isCommunity ? 'LAPORAN WARGA / STATUS LAYANAN' : isExpense ? 'KEUANGAN PRIBADI / RINGKASAN' : 'LAYANAN PUBLIK / SATU APLIKASI';
 ---
 <article id={project.id} class={`project-card project-card--${project.accent}`}>
-  <div class="project-art" aria-hidden="true">
+  {project.gallery?.length ? (
+    <div class:list={['project-art', 'project-art--gallery', `project-art--${project.accent}`]}>
+      <span class="art-index" data-en={`APP SCREENS / ${String(project.gallery.length).padStart(2, '0')}`} data-id={`TAMPILAN APLIKASI / ${String(project.gallery.length).padStart(2, '0')}`}>APP SCREENS / {String(project.gallery.length).padStart(2, '0')}</span>
+      <div class:list={['project-gallery', `project-gallery--${project.gallery.length}`]}>
+        {project.gallery.map((image, imageIndex) => <img src={image.src} alt={image.alt} data-en={image.alt} data-id={project.localized.id.galleryAlts?.[imageIndex] ?? image.alt} data-i18n-attribute="alt" loading="lazy" decoding="async" />)}
+      </div>
+      <span class="art-orbit-note" data-en={`PRODUCT INTERFACE / ${project.platforms.join(' / ')}`} data-id={`ANTARMUKA PRODUK / ${project.platforms.join(' / ')}`}>PRODUCT INTERFACE / {project.platforms.join(' / ')}</span>
+    </div>
+  ) : conceptKind ? (
+    <ProjectConcept kind={conceptKind} />
+  ) : (
+  <div class={`project-art project-art--${project.accent}`} aria-hidden="true">
     <span class="art-index">VISUAL STUDY / {String(index + 1).padStart(2, '0')}</span>
     <div class="art-ring art-ring--outer"></div>
     <div class="art-ring art-ring--inner"></div>
@@ -19,67 +34,69 @@ const isExpense = project.accent === 'expense';
         </div>
         {isEsign ? (
           <div class="screen-content screen-content--esign">
-            <span class="screen-kicker">Nusawork e-Sign · Mobile</span>
-            <strong>Digital signatures<br />for business.</strong>
+            <span class="screen-kicker" data-en="Nusawork e-Sign · Mobile" data-id="Nusawork e-Sign · Mobile">Nusawork e-Sign · Mobile</span>
+            <strong><span data-en="Digital signatures" data-id="Tanda tangan digital">Digital signatures</span><br /><span data-en="for business." data-id="untuk bisnis.">for business.</span></strong>
             <div class="screen-document">
               <span class="screen-document-icon">PDF</span>
-              <span><b>HR agreement</b><small>Signature + e-Meterai</small></span>
+              <span><b data-en="HR agreement" data-id="Perjanjian HR">HR agreement</b><small data-en="Signature + e-Meterai" data-id="Tanda tangan + e-Meterai">Signature + e-Meterai</small></span>
             </div>
-            <div class="screen-signature"><span>SIGNATURE / E-METERAI</span><i>Y</i></div>
-            <div class="screen-action">Review document <span aria-hidden="true">&#8594;</span></div>
+            <div class="screen-signature"><span data-en="SIGNATURE / E-METERAI" data-id="TANDA TANGAN / E-METERAI">SIGNATURE / E-METERAI</span><i>Y</i></div>
+            <div class="screen-action"><span data-en="Review document" data-id="Tinjau dokumen">Review document</span> <span aria-hidden="true">&#8594;</span></div>
           </div>
         ) : isCommunity ? (
           <div class="screen-content screen-content--community">
-            <span class="screen-kicker">Community · report management</span>
-            <strong>Every report,<br />in view.</strong>
+            <span class="screen-kicker" data-en="Community · report management" data-id="Layanan warga · manajemen laporan">Community · report management</span>
+            <strong><span data-en="Every report," data-id="Setiap laporan,">Every report,</span><br /><span data-en="in view." data-id="terpantau.">in view.</span></strong>
             <div class="screen-report-panel">
-              <span>REPORT OVERVIEW</span>
-              <div class="screen-report-row"><i></i>Community reports</div>
-              <div class="screen-report-row"><i></i>Updates by status</div>
-              <div class="screen-report-row"><i></i>Service totals</div>
+              <span data-en="REPORT OVERVIEW" data-id="RINGKASAN LAPORAN">REPORT OVERVIEW</span>
+              <div class="screen-report-row"><i></i><span data-en="Community reports" data-id="Laporan warga">Community reports</span></div>
+              <div class="screen-report-row"><i></i><span data-en="Updates by status" data-id="Pembaruan status">Updates by status</span></div>
+              <div class="screen-report-row"><i></i><span data-en="Service totals" data-id="Jumlah layanan">Service totals</span></div>
             </div>
-            <div class="screen-report-action">Review reports <span aria-hidden="true">&#8594;</span></div>
+            <div class="screen-report-action"><span data-en="Review reports" data-id="Tinjau laporan">Review reports</span> <span aria-hidden="true">&#8594;</span></div>
           </div>
         ) : isExpense ? (
           <div class="screen-content screen-content--expense">
-            <span class="screen-kicker">Personal finance · daily overview</span>
-            <strong>Know where<br />it goes.</strong>
+            <span class="screen-kicker" data-en="Personal finance · daily overview" data-id="Keuangan pribadi · ringkasan harian">Personal finance · daily overview</span>
+            <strong><span data-en="Know where" data-id="Ketahui ke mana">Know where</span><br /><span data-en="it goes." data-id="uangmu pergi.">it goes.</span></strong>
             <div class="screen-finance-panel">
-              <span>MONTHLY OVERVIEW</span>
-              <div class="screen-finance-row"><i></i>Income overview</div>
-              <div class="screen-finance-row"><i></i>Expense history</div>
+              <span data-en="MONTHLY OVERVIEW" data-id="RINGKASAN BULANAN">MONTHLY OVERVIEW</span>
+              <div class="screen-finance-row"><i></i><span data-en="Income overview" data-id="Ringkasan pemasukan">Income overview</span></div>
+              <div class="screen-finance-row"><i></i><span data-en="Expense history" data-id="Riwayat pengeluaran">Expense history</span></div>
             </div>
-            <div class="screen-finance-categories"><span>Food</span><span>Transport</span><span>More</span></div>
+            <div class="screen-finance-categories"><span data-en="Food" data-id="Makanan">Food</span><span data-en="Transport" data-id="Transportasi">Transport</span><span data-en="More" data-id="Lainnya">More</span></div>
           </div>
         ) : (
           <div class="screen-content screen-content--sumut">
-            <span class="screen-kicker">North Sumatra · Public services</span>
-            <strong>One portal,<br />for everyone.</strong>
+            <span class="screen-kicker" data-en="North Sumatra · Public services" data-id="Sumatera Utara · Layanan publik">North Sumatra · Public services</span>
+            <strong><span data-en="One portal," data-id="Satu portal,">One portal,</span><br /><span data-en="for everyone." data-id="untuk semua.">for everyone.</span></strong>
             <div class="screen-services">
-              <span><i>+</i>Health</span>
-              <span><i>&#9678;</i>Tourism</span>
-              <span><i>&#8599;</i>Licensing</span>
+              <span><i>+</i><span data-en="Health" data-id="Kesehatan">Health</span></span>
+              <span><i>&#9678;</i><span data-en="Tourism" data-id="Pariwisata">Tourism</span></span>
+              <span><i>&#8599;</i><span data-en="Licensing" data-id="Perizinan">Licensing</span></span>
             </div>
-            <div class="screen-service-note"><b>Vehicle tax · Public reports</b><span>Government info · Local news</span></div>
+            <div class="screen-service-note"><b data-en="Vehicle tax · Public reports" data-id="Pajak kendaraan · Laporan publik">Vehicle tax · Public reports</b><span data-en="Government info · Local news" data-id="Info pemerintah · Berita daerah">Government info · Local news</span></div>
           </div>
         )}
       </div>
     </div>
-    <span class="art-orbit-note">{isEsign ? 'SIGNATURE / E-METERAI / MOBILE' : isCommunity ? 'COMMUNITY REPORTS / SERVICE STATUS' : isExpense ? 'PERSONAL FINANCE / DAILY OVERVIEW' : 'PUBLIC SERVICES / ONE APP'}</span>
+    <span class="art-orbit-note" data-en={orbitNote} data-id={orbitNoteId}>{orbitNote}</span>
   </div>
+  )}
   <div class="project-copy">
     <div>
       <div class="project-heading">
-        <div><p class="eyebrow">{project.type}</p><h3>{project.title}</h3></div>
+        <div><p class="eyebrow" data-en={project.type} data-id={project.localized.id.type}>{project.type}</p><h3>{project.title}</h3></div>
         <div class="project-meta">
           <span class="project-platforms">{project.platforms.join(' / ')}</span>
-          <span class:list={['project-release', { 'project-release--released': project.releaseStatus === 'Released' }]}>{project.releaseStatus}</span>
+          <span class:list={['project-release', { 'project-release--released': project.releaseStatus === 'Released', 'project-release--current': project.releaseStatus === 'In progress' }]} data-en={project.releaseStatus} data-id={project.localized.id.releaseStatus}>{project.releaseStatus}</span>
+          {project.contributionLabel && <span class="project-context" data-en={project.contributionLabel} data-id={project.localized.id.contributionLabel}>{project.contributionLabel}</span>}
         </div>
       </div>
-      <p class="project-description">{project.description}</p>
+      <p class="project-description" data-en={project.description} data-id={project.localized.id.description}>{project.description}</p>
     </div>
     <div class="project-bottom">
-      <ul class="tag-list">{project.tags.map((tag) => <li>{tag}</li>)}</ul>
+      <ul class="tag-list">{project.tags.map((tag, tagIndex) => <li data-en={tag} data-id={project.localized.id.tags[tagIndex] ?? tag}>{tag}</li>)}</ul>
       {project.links.length > 0
         ? <div class="store-links">{project.links.map((link) => <a href={link.href} target="_blank" rel="noreferrer" aria-label={link.label} title={link.label}>
           {link.icon === 'google-play' ? (
@@ -96,8 +113,8 @@ const isExpense = project.accent === 'expense';
           )}
         </a>)}</div>
         : project.repository
-          ? <a class="project-source-link" href={project.repository} target="_blank" rel="noreferrer">View project on GitHub <span aria-hidden="true">&#8599;</span></a>
-          : <span class="project-state">Selected project</span>}
+          ? <a class="project-source-link" href={project.repository} target="_blank" rel="noreferrer"><span data-en="View project on GitHub" data-id="Lihat proyek di GitHub">View project on GitHub</span> <span aria-hidden="true">&#8599;</span></a>
+          : <span class="project-state" data-en="Selected project" data-id="Proyek pilihan">Selected project</span>}
     </div>
   </div>
 </article>
