@@ -648,7 +648,7 @@ html[data-theme='dark'] .theme-icon--sun { display: block; }
   .tool-logo { width: 2.45rem; height: 2.45rem; border-radius: .75rem; }
   .tool-logo img { width: 1.25rem; height: 1.25rem; }
   .site-header { top: .7rem; }
-  .site-header .nav-wrap { display: grid; width: min(100% - 2rem, 38rem); grid-template-columns: minmax(0, 1fr) auto; column-gap: .5rem; row-gap: 0; padding: .4rem .8rem .3rem; border-radius: 1.2rem; }
+  .site-header .nav-wrap { display: grid; width: min(calc(100vw - 2rem), 38rem); max-width: calc(100vw - 2rem); grid-template-columns: minmax(0, 1fr) auto; column-gap: .5rem; row-gap: 0; padding: .4rem .8rem .3rem; border-radius: 1.2rem; }
   .desktop-nav { display: none; }
   .site-controls { margin-left: 0; }
   .mobile-nav { position: static; display: flex; grid-column: 1 / -1; width: 100%; justify-content: space-between; gap: .45rem; margin-top: .3rem; padding: .45rem .1rem 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; box-shadow: none; backdrop-filter: none; color: var(--muted); font-size: .68rem; }
@@ -689,7 +689,7 @@ html[data-theme='dark'] .theme-icon--sun { display: block; }
   .container { width: calc(100% - 2rem); }
   .toolkit::before { right: -22%; width: 140%; }
   .site-header { top: .55rem; }
-  .site-header .nav-wrap { width: calc(100% - 2rem); gap: .5rem; padding: .35rem .55rem .25rem; }
+  .site-header .nav-wrap { width: calc(100vw - 2rem); gap: .5rem; padding: .35rem .55rem .25rem; }
   .wordmark { font-size: .72rem; }
   .wordmark-mark { width: 2.15rem; height: 2.15rem; }
   .mobile-nav { justify-content: space-between; gap: .4rem; margin-top: .25rem; padding: .4rem .1rem 0; font-size: .66rem; }
@@ -755,6 +755,8 @@ html[data-theme='dark'] .theme-icon--sun { display: block; }
 }
 
 @media (max-width: 360px) {
+  .wordmark { gap: .4rem; font-size: .66rem; }
+  .wordmark-mark { width: 1.9rem; height: 1.9rem; }
   .mobile-nav { padding-inline: .1rem; font-size: .62rem; }
   .concept-scene--community, .concept-scene--expense { min-height: 35rem; gap: .55rem .45rem; padding-inline: .5rem; }
 }
