@@ -1,24 +1,47 @@
 ---
 import { site } from './data';
 ---
-<footer class="site-footer">
-  <div class="container">
+<footer class="site-footer" aria-labelledby="footer-title">
+  <span class="footer-watermark" aria-hidden="true">YOGA</span>
+  <div class="container footer-shell">
+    <div class="footer-top">
+      <a class="footer-signature" href="/" aria-label={`${site.name}, home`} data-aria-label-en={`${site.name}, home`} data-aria-label-id={`${site.name}, beranda`}>
+        <strong>{site.name}</strong>
+        <span data-en={site.role} data-id="Developer Flutter">{site.role}</span>
+      </a>
+      <p class="footer-location" data-en="Based in Indonesia" data-id="Berbasis di Indonesia">Based in Indonesia</p>
+    </div>
+
     <div class="footer-main">
-      <div class="footer-identity">
-        <a class="footer-brand" href="/">{site.name}<span data-en={` / ${site.role}`} data-id=" / Developer Flutter"> / {site.role}</span></a>
-        <p data-en="Mobile products, built with care." data-id="Produk mobile, dibuat dengan penuh perhatian.">Mobile products, built with care.</p>
-      </div>
-      <div class="footer-contact">
+      <div class="footer-message">
         <p class="footer-label" data-en="Get in touch" data-id="Hubungi saya">Get in touch</p>
-        <a href={`mailto:${site.email}`}><span data-en="Email" data-id="Email">Email</span><strong>{site.email}</strong></a>
-        <a href={site.whatsapp} target="_blank" rel="noreferrer"><span data-en="WhatsApp" data-id="WhatsApp">WhatsApp</span><strong>+62 812 6507 3404</strong></a>
+        <h2 id="footer-title"><span data-en="Have a mobile idea?" data-id="Punya ide aplikasi mobile?">Have a mobile idea?</span><br /><em data-en="Let's talk." data-id="Mari ngobrol.">Let's talk.</em></h2>
+        <p class="footer-description" data-en="For project inquiries, collaboration, or a quick hello." data-id="Untuk pertanyaan proyek, kolaborasi, atau sekadar menyapa.">For project inquiries, collaboration, or a quick hello.</p>
+        <a class="footer-email" href={`mailto:${site.email}`}>
+          <span class="footer-email-copy"><small data-en="EMAIL ME" data-id="KIRIM EMAIL">EMAIL ME</small><strong>{site.email}</strong></span>
+          <span class="footer-email-arrow" aria-hidden="true">&#8599;</span>
+        </a>
       </div>
-      <div class="footer-social">
+
+      <div class="footer-connections">
         <p class="footer-label" data-en="Find me online" data-id="Temukan saya">Find me online</p>
-        <a href={site.github} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">&#8599;</span></a>
-        <a href={site.linkedin} target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">&#8599;</span></a>
+        <div class="footer-link-list">
+          <a class="footer-link" href={site.whatsapp} target="_blank" rel="noreferrer">
+            <span><small>WhatsApp</small><strong>+62 812 6507 3404</strong></span><span class="footer-link-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+          <a class="footer-link" href={site.github} target="_blank" rel="noreferrer">
+            <span><small>GitHub</small><strong>@Yogasandhy</strong></span><span class="footer-link-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+          <a class="footer-link" href={site.linkedin} target="_blank" rel="noreferrer">
+            <span><small>LinkedIn</small><strong>Yoga Sandhy Winata</strong></span><span class="footer-link-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom"><span>&copy; {new Date().getFullYear()} {site.name}</span><span><span data-en="Flutter Developer" data-id="Developer Flutter">Flutter Developer</span><i></i> Indonesia</span></div>
+
+    <div class="footer-bottom">
+      <span>&copy; {new Date().getFullYear()} {site.name}</span>
+      <a href="#main-content"><span data-en="Back to top" data-id="Kembali ke atas">Back to top</span><span aria-hidden="true">&#8593;</span></a>
+    </div>
   </div>
 </footer>

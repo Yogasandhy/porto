@@ -1,30 +1,27 @@
 ---
 import ProjectConcept from './ProjectConcept.astro';
-interface Props { project: typeof import('./data').projects[number]; index: number; }
-const { project, index } = Astro.props;
+interface Props { project: typeof import('./data').projects[number]; }
+const { project } = Astro.props;
 const isEsign = project.accent === 'esign';
 const isCommunity = project.accent === 'community';
 const isExpense = project.accent === 'expense';
 const conceptKind = project.accent === 'community' || project.accent === 'expense' ? project.accent : null;
-const orbitNote = isEsign ? 'SIGNATURE / E-METERAI / MOBILE' : isCommunity ? 'COMMUNITY REPORTS / SERVICE STATUS' : isExpense ? 'PERSONAL FINANCE / DAILY OVERVIEW' : 'PUBLIC SERVICES / ONE APP';
-const orbitNoteId = isEsign ? 'TANDA TANGAN / E-METERAI / MOBILE' : isCommunity ? 'LAPORAN WARGA / STATUS LAYANAN' : isExpense ? 'KEUANGAN PRIBADI / RINGKASAN' : 'LAYANAN PUBLIK / SATU APLIKASI';
 ---
 <article id={project.id} class={`project-card project-card--${project.accent}`}>
   {project.gallery?.length ? (
     <div class:list={['project-art', 'project-art--gallery', `project-art--${project.accent}`]}>
-      <span class="art-index" data-en={`APP SCREENS / ${String(project.gallery.length).padStart(2, '0')}`} data-id={`TAMPILAN APLIKASI / ${String(project.gallery.length).padStart(2, '0')}`}>APP SCREENS / {String(project.gallery.length).padStart(2, '0')}</span>
       <div class:list={['project-gallery', `project-gallery--${project.gallery.length}`]}>
         {project.gallery.map((image, imageIndex) => <img src={image.src} alt={image.alt} data-en={image.alt} data-id={project.localized.id.galleryAlts?.[imageIndex] ?? image.alt} data-i18n-attribute="alt" loading="lazy" decoding="async" />)}
       </div>
-      <span class="art-orbit-note" data-en={`PRODUCT INTERFACE / ${project.platforms.join(' / ')}`} data-id={`ANTARMUKA PRODUK / ${project.platforms.join(' / ')}`}>PRODUCT INTERFACE / {project.platforms.join(' / ')}</span>
+      <img class="project-art-app-icon" src={project.icon} alt="" aria-hidden="true" width="56" height="56" loading="lazy" decoding="async" />
     </div>
   ) : conceptKind ? (
-    <ProjectConcept kind={conceptKind} />
+    <ProjectConcept kind={conceptKind} icon={project.icon} />
   ) : (
   <div class={`project-art project-art--${project.accent}`} aria-hidden="true">
-    <span class="art-index">VISUAL STUDY / {String(index + 1).padStart(2, '0')}</span>
     <div class="art-ring art-ring--outer"></div>
     <div class="art-ring art-ring--inner"></div>
+    <img class="project-art-app-icon" src={project.icon} alt="" width="56" height="56" loading="lazy" decoding="async" />
     <div class="art-phone">
       <div class="art-island"></div>
       <div class="art-screen">
@@ -80,7 +77,6 @@ const orbitNoteId = isEsign ? 'TANDA TANGAN / E-METERAI / MOBILE' : isCommunity 
         )}
       </div>
     </div>
-    <span class="art-orbit-note" data-en={orbitNote} data-id={orbitNoteId}>{orbitNote}</span>
   </div>
   )}
   <div class="project-copy">

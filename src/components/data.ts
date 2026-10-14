@@ -117,7 +117,7 @@ export const projects: Project[] = [
     summary: 'An interactive learning game adapted from mobile to the browser.',
     accent: 'studyo',
     featured: false,
-    icon: '/projects/studyo-math-game.webp',
+    icon: '/projects/studyo-anymath-icon.png',
     platforms: ['Mobile', 'Web'],
     tags: ['Flutter', 'Flutter Web', 'Game UI', 'Multilingual'],
     releaseStatus: 'Released',

@@ -1,9 +1,10 @@
 ---
 interface Props {
   kind: 'community' | 'expense';
+  icon: string;
 }
 
-const { kind } = Astro.props;
+const { kind, icon } = Astro.props;
 const isCommunity = kind === 'community';
 const appTitle = isCommunity ? 'Reports' : 'My Wallet';
 const appTitleId = isCommunity ? 'Pelayanan' : 'Dompetku';
@@ -22,7 +23,7 @@ const screens = isCommunity
     ];
 ---
 <div class:list={['project-art', 'project-art--concept', `project-art--${kind}`]}>
-  <span class="art-index" data-en="CONCEPT UI / MOBILE SCREENS" data-id="KONSEP UI / LAYAR MOBILE">CONCEPT UI / MOBILE SCREENS</span>
+  <img class="project-art-app-icon" src={icon} alt="" aria-hidden="true" width="56" height="56" loading="lazy" decoding="async" />
   <div class:list={['concept-scene', `concept-scene--${kind}`]} aria-hidden="true">
     {screens.map((screen) => (
       <article class:list={['concept-device', `concept-device--${screen.id}`]}>
@@ -106,5 +107,4 @@ const screens = isCommunity
       </article>
     ))}
   </div>
-  <span class="art-orbit-note" data-en={isCommunity ? 'REPORTS / REVIEW / STATUS' : 'BALANCE / TRANSACTIONS / BUDGETS'} data-id={isCommunity ? 'LAPORAN / TINJAU / STATUS' : 'SALDO / TRANSAKSI / ANGGARAN'}>{isCommunity ? 'REPORTS / REVIEW / STATUS' : 'BALANCE / TRANSACTIONS / BUDGETS'}</span>
 </div>
