@@ -631,7 +631,7 @@ html[data-theme='dark'] .theme-icon--sun { display: block; }
 /* Footer is the site's only dark surface */
 .site-footer { position: relative; isolation: isolate; overflow: hidden; background: var(--footer-bg); color: var(--footer-text); }
 .site-footer::before { position: absolute; z-index: -1; top: -20rem; right: -8rem; width: min(54rem, 82vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #3658e82b 0, #3658e80d 45%, transparent 70%); content: ''; pointer-events: none; }
-.footer-watermark { position: absolute; z-index: 0; bottom: -.36em; left: 50%; color: #ffffff14; font: 700 clamp(9rem, 27vw, 22rem)/.72 var(--serif); letter-spacing: -.1em; pointer-events: none; text-transform: uppercase; transform: translateX(-50%); user-select: none; white-space: nowrap; }
+.footer-watermark { position: absolute; z-index: 0; right: 0; bottom: 0; left: 0; color: #ffffff14; font: 700 clamp(5rem, 24vw, 20rem)/.9 var(--serif); letter-spacing: -.08em; pointer-events: none; text-align: center; text-transform: uppercase; user-select: none; white-space: nowrap; }
 .footer-shell { position: relative; z-index: 1; }
 .footer-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1.8rem 0; border-bottom: 1px solid #ffffff20; }
 .footer-signature { display: grid; gap: .2rem; color: var(--footer-text); }
