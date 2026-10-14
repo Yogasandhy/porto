@@ -4,6 +4,7 @@ type Theme = 'light' | 'dark';
 const root = document.documentElement;
 const localeButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-locale-button]')];
 const themeButton = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+const siteHeader = document.querySelector<HTMLElement>('.site-header');
 const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
 const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
 
@@ -66,6 +67,24 @@ localeButtons.forEach((button) => {
 themeButton?.addEventListener('click', () => {
   applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
 });
+
+let scrollFramePending = false;
+function syncHeaderScrollState() {
+  if (!siteHeader) return;
+  const isCompact = window.scrollY > 72;
+  siteHeader.classList.toggle('is-compact', isCompact);
+}
+
+window.addEventListener('scroll', () => {
+  if (scrollFramePending) return;
+  scrollFramePending = true;
+  window.requestAnimationFrame(() => {
+    scrollFramePending = false;
+    syncHeaderScrollState();
+  });
+}, { passive: true });
+window.addEventListener('pageshow', syncHeaderScrollState);
+syncHeaderScrollState();
 
 applyLocale(root.lang === 'id' ? 'id' : 'en', false);
 applyTheme(root.dataset.theme === 'dark' ? 'dark' : 'light', false);

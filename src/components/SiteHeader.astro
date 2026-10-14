@@ -8,7 +8,7 @@ const current = Astro.url.pathname;
       <img class="wordmark-mark" src={site.avatar} alt="" aria-hidden="true" width="977" height="1610" decoding="async" />
       <span>{site.name}</span>
     </a>
-    <nav class="desktop-nav" aria-label="Primary navigation" data-aria-label-en="Primary navigation" data-aria-label-id="Navigasi utama">
+    <nav class="desktop-nav" id="desktop-navigation" aria-label="Primary navigation" data-aria-label-en="Primary navigation" data-aria-label-id="Navigasi utama">
       {navigation.map((item) => <a href={item.href} aria-current={current === item.href ? 'page' : undefined} data-en={item.label} data-id={item.labelId}>{item.label}</a>)}
     </nav>
     <div class="site-controls">
@@ -21,6 +21,6 @@ const current = Astro.url.pathname;
         <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" /></svg>
       </button>
     </div>
-    <nav class="mobile-nav" aria-label="Mobile navigation" data-aria-label-en="Mobile navigation" data-aria-label-id="Navigasi mobile">{navigation.map((item) => <a href={item.href} aria-current={current === item.href ? 'page' : undefined} data-en={item.label} data-id={item.labelId}>{item.label}</a>)}</nav>
+    <nav class="mobile-nav" id="mobile-navigation" aria-label="Mobile navigation" data-aria-label-en="Mobile navigation" data-aria-label-id="Navigasi mobile">{navigation.map((item) => <a href={item.href} aria-current={current === item.href ? 'page' : undefined} data-en={item.label} data-id={item.labelId}>{item.label}</a>)}</nav>
   </div>
 </header>
