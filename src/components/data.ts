@@ -6,7 +6,6 @@ export const site = {
   location: 'Indonesia',
   linkedin: 'https://www.linkedin.com/in/yoga-sandhy-winata-35100b229/',
   email: 'yogasandhywinata@gmail.com',
-  whatsapp: 'https://wa.me/6281265073404',
 };
 
 export const navigation = [
