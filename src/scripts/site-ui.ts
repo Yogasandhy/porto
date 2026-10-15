@@ -86,5 +86,45 @@ window.addEventListener('scroll', () => {
 window.addEventListener('pageshow', syncHeaderScrollState);
 syncHeaderScrollState();
 
+const phoneStacks = [...document.querySelectorAll<HTMLElement>('[data-phone-fan]')];
+if (phoneStacks.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+  function preparePhoneStack(stack: HTMLElement) {
+    stack.classList.add('is-fan-preparing');
+    stack.classList.remove('is-stacked');
+    stack.classList.add('is-fan-animated');
+
+    const stackBounds = stack.getBoundingClientRect();
+    const center = stackBounds.left + stackBounds.width / 2;
+    const middle = stackBounds.top + stackBounds.height / 2;
+    stack.querySelectorAll<HTMLElement>('.phone-fan-card').forEach((card) => {
+      const bounds = card.getBoundingClientRect();
+      card.style.setProperty('--fan-offset-x', `${center - (bounds.left + bounds.width / 2)}px`);
+      card.style.setProperty('--fan-offset-y', `${middle - (bounds.top + bounds.height / 2)}px`);
+    });
+
+    stack.classList.add('is-stacked');
+    void stack.offsetWidth;
+    stack.classList.remove('is-fan-preparing');
+  }
+
+  phoneStacks.forEach(preparePhoneStack);
+  const phoneStackObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const stack = entry.target as HTMLElement;
+      phoneStackObserver.unobserve(stack);
+      window.setTimeout(() => {
+        stack.classList.remove('is-stacked');
+        window.setTimeout(() => stack.classList.remove('is-fan-animated'), 1250);
+      }, 380);
+    });
+  }, { threshold: .2, rootMargin: '0px 0px -8% 0px' });
+
+  phoneStacks.forEach((stack) => phoneStackObserver.observe(stack));
+  window.addEventListener('resize', () => {
+    phoneStacks.filter((stack) => stack.classList.contains('is-stacked')).forEach(preparePhoneStack);
+  }, { passive: true });
+}
+
 applyLocale(root.lang === 'id' ? 'id' : 'en', false);
 applyTheme(root.dataset.theme === 'dark' ? 'dark' : 'light', false);

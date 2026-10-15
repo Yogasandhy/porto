@@ -398,6 +398,16 @@ html[data-theme='dark'] .theme-icon--sun { display: block; }
 .project-card:hover .project-gallery--sumut .project-phone-frame:nth-child(2) { transform: rotate(-3deg) translateY(-.7rem); }
 .project-card:hover .project-gallery--sumut .project-phone-frame:nth-child(3) { transform: rotate(3deg) translateY(-.7rem); }
 .project-card:hover .project-gallery--sumut .project-phone-frame:nth-child(4) { transform: rotate(7deg) translateY(-.1rem); }
+.phone-fan-stack.is-fan-animated .phone-fan-card { transition: transform .82s cubic-bezier(.2, .85, .25, 1), opacity .42s ease, box-shadow .3s ease; }
+.phone-fan-stack.is-fan-preparing .phone-fan-card { transition: none !important; }
+.phone-fan-stack.is-fan-animated .phone-fan-card:nth-child(1) { transition-delay: .18s; }
+.phone-fan-stack.is-fan-animated .phone-fan-card:nth-child(2) { transition-delay: 0s; }
+.phone-fan-stack.is-fan-animated .phone-fan-card:nth-child(3) { transition-delay: .08s; }
+.phone-fan-stack.is-fan-animated .phone-fan-card:nth-child(4) { transition-delay: .16s; }
+.project-card .phone-fan-stack.is-fan-animated.is-stacked .phone-fan-card,
+.featured-project .phone-fan-stack.is-fan-animated.is-stacked .phone-fan-card { z-index: 3; transform: translate(var(--fan-offset-x, 0px), var(--fan-offset-y, 0px)) scale(.72) rotate(0deg); opacity: 0; }
+.project-card .phone-fan-stack.is-fan-animated.is-stacked .phone-fan-card:first-child,
+.featured-project .phone-fan-stack.is-fan-animated.is-stacked .phone-fan-card:first-child { z-index: 5; transform: translate(var(--fan-offset-x, 0px), var(--fan-offset-y, 0px)) scale(.86) rotate(0deg); opacity: 1; }
 .project-art--concept { isolation: isolate; }
 .project-art--concept::before { width: 23rem; height: 23rem; border-color: #ffffffa8; background: radial-gradient(circle, #ffffffb0 0, #ffffff24 58%, transparent 70%); }
 .project-art--concept::after { width: 27rem; height: 27rem; border-color: #ffffff70; transform: none; }

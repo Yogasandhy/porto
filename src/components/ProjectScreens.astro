@@ -1,0 +1,23 @@
+---
+interface Props {
+  project: typeof import('./data').projects[number];
+  variant: 'featured' | 'gallery';
+}
+
+const { project, variant } = Astro.props;
+const images = variant === 'featured' ? (project.gallery ?? []).slice(0, 3) : project.gallery ?? [];
+const usePhoneFrames = project.accent === 'studyo' || project.accent === 'sumut';
+---
+{variant === 'featured' ? (
+  <div class="featured-screen-stack phone-fan-stack" data-phone-fan="true">
+    {images.map((image) => <img class="featured-screen phone-fan-card" src={image.src} alt="" loading="lazy" decoding="async" />)}
+  </div>
+) : (
+  <div class:list={['project-gallery', 'phone-fan-stack', `project-gallery--${images.length}`, `project-gallery--${project.accent}`]} data-phone-fan="true">
+    {images.map((image, imageIndex) => usePhoneFrames ? (
+      <div class="project-phone-frame phone-fan-card"><img src={image.src} alt={image.alt} data-en={image.alt} data-id={project.localized.id.galleryAlts?.[imageIndex] ?? image.alt} data-i18n-attribute="alt" loading="lazy" decoding="async" /></div>
+    ) : (
+      <img class="phone-fan-card" src={image.src} alt={image.alt} data-en={image.alt} data-id={project.localized.id.galleryAlts?.[imageIndex] ?? image.alt} data-i18n-attribute="alt" loading="lazy" decoding="async" />
+    ))}
+  </div>
+)}

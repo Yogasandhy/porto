@@ -1,5 +1,6 @@
 ---
 import ProjectConcept from './ProjectConcept.astro';
+import ProjectScreens from './ProjectScreens.astro';
 interface Props { project: typeof import('./data').projects[number]; }
 const { project } = Astro.props;
 const isEsign = project.accent === 'esign';
@@ -10,13 +11,7 @@ const conceptKind = project.accent === 'community' || project.accent === 'expens
 <article id={project.id} class={`project-card project-card--${project.accent}`}>
   {project.gallery?.length ? (
     <div class:list={['project-art', 'project-art--gallery', `project-art--${project.accent}`]}>
-      <div class:list={['project-gallery', `project-gallery--${project.gallery.length}`, `project-gallery--${project.accent}`]}>
-        {project.gallery.map((image, imageIndex) => project.accent === 'studyo' || project.accent === 'sumut' ? (
-          <div class="project-phone-frame"><img src={image.src} alt={image.alt} data-en={image.alt} data-id={project.localized.id.galleryAlts?.[imageIndex] ?? image.alt} data-i18n-attribute="alt" loading="lazy" decoding="async" /></div>
-        ) : (
-          <img src={image.src} alt={image.alt} data-en={image.alt} data-id={project.localized.id.galleryAlts?.[imageIndex] ?? image.alt} data-i18n-attribute="alt" loading="lazy" decoding="async" />
-        ))}
-      </div>
+      <ProjectScreens project={project} variant="gallery" />
       <img class="project-art-app-icon" src={project.icon} alt="" aria-hidden="true" width="56" height="56" loading="lazy" decoding="async" />
     </div>
   ) : conceptKind ? (

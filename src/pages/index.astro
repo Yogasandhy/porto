@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import ProjectScreens from '../components/ProjectScreens.astro';
 import { featuredProjects } from '../components/data';
 ---
 <SiteLayout title="Flutter Developer" titleId="Developer Flutter" description="Portfolio of Yoga Sandhy Winata, Flutter developer." descriptionId="Portofolio Yoga Sandhy Winata, developer Flutter.">
@@ -30,12 +31,10 @@ import { featuredProjects } from '../components/data';
         <a class="text-link" href="/work/"><span data-en="See all projects" data-id="Lihat semua proyek">See all projects</span> <span aria-hidden="true">&#8599;</span></a>
       </div>
       <div class="featured-grid">
-        {featuredProjects.map((project, index) => <a class:list={['featured-project', `featured-project--${project.accent}`]} href={`/work/#${project.id}`}>
+        {featuredProjects.map((project) => <a class:list={['featured-project', `featured-project--${project.accent}`]} href={`/work/#${project.id}`}>
           <div class="featured-art" aria-hidden="true">
             <div class="featured-art-ring"></div>
-            <div class="featured-screen-stack">
-              {project.gallery?.slice(0, 3).map((screen) => <img class="featured-screen" src={screen.src} alt="" loading="lazy" decoding="async" />)}
-            </div>
+            <ProjectScreens project={project} variant="featured" />
             <img class:list={['featured-app-icon', `featured-app-icon--${project.accent}`]} src={project.icon} alt="" loading="lazy" decoding="async" />
           </div>
           <div class="featured-copy">

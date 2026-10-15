@@ -24,9 +24,9 @@ const screens = isCommunity
 ---
 <div class:list={['project-art', 'project-art--concept', `project-art--${kind}`]}>
   <img class="project-art-app-icon" src={icon} alt="" aria-hidden="true" width="56" height="56" loading="lazy" decoding="async" />
-  <div class:list={['concept-scene', `concept-scene--${kind}`]} aria-hidden="true">
+  <div class:list={['concept-scene', 'phone-fan-stack', `concept-scene--${kind}`]} data-phone-fan="true" aria-hidden="true">
     {screens.map((screen) => (
-      <article class:list={['concept-device', `concept-device--${screen.id}`]}>
+      <article class:list={['concept-device', 'phone-fan-card', `concept-device--${screen.id}`]}>
         <div class="concept-device-screen">
           <div class="concept-status"><strong>9:41</strong><span><i></i><i></i><b></b></span></div>
           <div class="concept-appbar">
